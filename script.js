@@ -72,7 +72,42 @@ function getGradientColors(weatherMain) {
     }
 }
 
+// City Assit
+document.addEventListener('DOMContentLoaded', function() {
+    var cityInput = document.getElementById('cityinput');
+
+    cityInput.addEventListener('input', function() {
+        var inputValue = cityInput.value;
+        
+        if (inputValue.length >= 2) {
+            fetch('https://api.openweathermap.org/data/2.5/find?q=' + inputValue + '&type=like&sort=population&cnt=10&appid=' + apiKey)
+                .then(response => response.json())
+                .then(data => {
+                    var cities = data.list.map(function(city) {
+                        return city.name + ", " + city.sys.country;
+                    });
+                    displayAutocompleteSuggestions(cities);
+                })
+                .catch(error => {
+                    console.error('Error fetching city suggestions:', error);
+                });
+        }
+    });
+
+    function displayAutocompleteSuggestions(suggestions) {
+        var autocompleteList = document.getElementById('autocomplete-list');
+        autocompleteList.innerHTML = '';
+
+        suggestions.forEach(function(suggestion) {
+            var option = document.createElement('option');
+            option.value = suggestion;
+            autocompleteList.appendChild(option);
+        });
+    }
+});
+
 
 function setGradientBackground(colors) {
     container.style.background = `linear-gradient(to bottom, ${colors[0]}, ${colors[1]})`;
 }
+

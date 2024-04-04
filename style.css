@@ -1,5 +1,4 @@
-/* Updated CSS Styles with Fixes */
-
+/* Default styles */
 body {
     background: linear-gradient(to bottom, #f0f0f0, #c9c9c9); /* Default gradient */
     font-family: 'Roboto', sans-serif;
@@ -104,3 +103,4 @@ body {
 .wrapper {
     animation: fadeIn 0.5s ease;
 }
+
