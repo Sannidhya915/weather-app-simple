@@ -126,6 +126,7 @@ function setWeatherIcon(weatherMain) {
         case 'snow':
             return '<i class="fa-solid fa-snowflake fa-xl" style="color: #74C0FC;"></i>'; 
         case 'mist':
+        case 'haze':
             return '<i class="fa-regular fa-smog fa-xl" style="color: #74C0FC;"></i>'; 
         case 'smoke':
             return '<i class="fa-solid fa-smog fa-xl"></i>'; 
