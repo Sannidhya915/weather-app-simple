@@ -5,6 +5,8 @@ var city = document.querySelector('#cityoutput');
 var description = document.querySelector('#description');
 var temp = document.querySelector('#temp');
 var wind = document.querySelector('#wind');
+var weatherIconElement = document.querySelector('#weatherIcon');
+var weatherMain = "clear"; 
 
 const apiKey = "82cbdfb9aad515b7d02be35f33bc05ef";
 
@@ -26,7 +28,7 @@ btn.addEventListener('click', function(){
                 throw new Error("City not found!");
             }
             
-            var weatherMain = data['weather'][0]['main']; // Use 'main' instead of 'description' for weather condition
+            var weatherMain = data['weather'][0]['main']; 
             var gradientColors = getGradientColors(weatherMain);
             setGradientBackground(gradientColors);
 
@@ -38,6 +40,7 @@ btn.addEventListener('click', function(){
             temp.innerHTML = `Temperature: <span>${conversion(temperature)}°C</span>`;
             description.innerHTML = `Sky Conditions: <span>${capitalizeFirstLetterOfWords(weatherMain)}</span>`;
             wind.innerHTML = `Wind Speed: <span>${windspeed} Km/H</span>`;
+            weatherIconElement.innerHTML = setWeatherIcon(weatherMain);
         })
         .catch(err => alert(err.message));
 });
@@ -111,3 +114,36 @@ function setGradientBackground(colors) {
     container.style.background = `linear-gradient(to bottom, ${colors[0]}, ${colors[1]})`;
 }
 
+function setWeatherIcon(weatherMain) {
+    console.log("Weather Main:", weatherMain);
+    switch (weatherMain.toLowerCase()) {
+        case 'thunderstorm':
+            return '<i class="fa-light fa-cloud-bolt fa-xl" style="color: #FFD43B;"></i>'; 
+        case 'drizzle':
+            return '<i class="fa-solid fa-cloud-rain fa-xl" style="color: #74C0FC;"></i>'; 
+        case 'rain':
+            return '<i class="fa-solid fa-cloud-showers-heavy fa-xl" style="color: #002f80;"></i>'; 
+        case 'snow':
+            return '<i class="fa-solid fa-snowflake fa-xl" style="color: #74C0FC;"></i>'; 
+        case 'mist':
+            return '<i class="fa-regular fa-smog fa-xl" style="color: #74C0FC;"></i>'; 
+        case 'smoke':
+            return '<i class="fa-solid fa-smog fa-xl"></i>'; 
+        case 'clear':
+            return '<i class="fa-regular fa-sun fa-xl" style="color: #FFD43B;"></i>'; 
+        case 'ash':
+            return '<i class="fa-regular fa-fire fa-xl" style="color: #f59324;"></i>'; 
+        case 'sand':
+            return '<i class="fa-solid fa-wind fa-xl" style="color: #FFD43B;"></i>'; 
+        case 'fog':
+            return '<i class="fa-solid fa-smog fa-xl" style="color: #0ab6f0;"></i>'; 
+        case 'squall':
+            return '<i class="fa-duotone fa-wind fa-xl" style="--fa-primary-color: #1a9cff; --fa-secondary-color: #1a9cff;"></i>'; // Wind icon for squall
+        case 'tornado':
+            return '<i class="fa-solid fa-tornado fa-xl" style="color: #74C0FC;"></i>'; 
+        case 'clouds':
+            return '<i class="fa-solid fa-cloud fa-xl" style="color: #74C0FC;"></i>';
+        default:
+            return '<i class="fas fa-question"></i>'; // Default icon for unknown weather
+    }
+}

@@ -1,6 +1,6 @@
-/* Default styles */
+
 body {
-    background: linear-gradient(to bottom, #f0f0f0, #c9c9c9); /* Default gradient */
+    background: linear-gradient(to bottom, #f0f0f0, #c9c9c9); 
     font-family: 'Roboto', sans-serif;
 }
 
@@ -56,15 +56,15 @@ body {
 
 .display {
     text-align: center;
-    background-color: rgba(249, 249, 249, 0.9); /* Translucent background color */
+    background-color: rgba(249, 249, 249, 0.9); 
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     width: 100%;
     max-width: 400px; 
-    margin: 20px auto; /* Center the display section horizontally */
-    margin-left: auto; /* Set left margin to auto */
-    margin-right: auto; /* Set right margin to auto */
+    margin: 20px auto; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
 .wrapper {
@@ -104,3 +104,32 @@ body {
     animation: fadeIn 0.5s ease;
 }
 
+
+
+@media screen and (max-width: 500px) {
+    .container {
+        max-width: 90%; 
+    }
+
+    .inputs {
+        flex-direction: column; 
+        margin-bottom: 10px; 
+    }
+
+    .inputs input[type="submit"] {
+        margin-left: 0; 
+        margin-top: 10px; 
+    }
+
+    .display {
+        padding: 10px; 
+    }
+
+    .wrapper {
+        grid-template-columns: 1fr; 
+    }
+
+    .wrapper h2 {
+        grid-column: auto; 
+    }
+}
